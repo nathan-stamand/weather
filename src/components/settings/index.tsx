@@ -20,7 +20,7 @@ export const Settings = () => {
         </PopoverTrigger>
         <PopoverContent className="divide-y">
           {Object.keys(settings).map((settingName) => (
-            <div className="flex justify-between items-center p-4">
+            <div key={settingName} className="flex justify-between items-center p-4">
               <Label
                 htmlFor={`${settingName}-setting`}
                 className={`p-2 rounded-lg ${!settings[settingName].value ? 'bg-primary text-white dark:text-black' : ''}`}

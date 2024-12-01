@@ -91,10 +91,10 @@ export const ThemeSwitcher = () => {
       onMouseOut={() => setShowTheme(false)}
       className={`relative rounded-full cursor-pointer`}
     >
-      <div className='grid place-items-center bg-slate-300 dark:bg-slate-500 h-8 w-8 rounded-full' >
+      <div className='grid place-items-center h-8 w-8 rounded-full' >
         {themeInfo.icon}
       </div>
-      <p className={`absolute rounded-md top-[150%] left-1/2 -translate-x-1/2 w-auto bg-slate-700 text-slate-200 p-2 ${showTheme ? 'opacity-1' : 'opacity-0'} transition-opacity duration-200`}>
+      <p className={`absolute rounded-md top-[150%] left-1/2 -translate-x-1/2 w-auto bg-black text-white p-2 ${showTheme ? 'opacity-1' : 'opacity-0'} transition-opacity duration-200`}>
         {themeInfo.title}
       </p>
     </button>

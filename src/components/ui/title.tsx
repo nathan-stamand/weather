@@ -26,18 +26,18 @@ interface TitleProps
   children: React.ReactNode;
 }
 
-export const Title = ({ size, children }: TitleProps) => {
+export const Title = ({ size, children, ...props }: TitleProps) => {
   let heading;
   size = size || 'h1';
   switch (size) {
     case 'h1':
-      heading = <h1 className={cn(titleVariants({ size }))}>{children}</h1>
+      heading = <h1 {...props} className={`${cn(titleVariants({ size }))} ${props.className}`}>{children}</h1>
       break;
     case 'h2':
-      heading = <h2 className={cn(titleVariants({ size }))}>{children}</h2>
+      heading = <h2 {...props} className={`${cn(titleVariants({ size }))} ${props.className}`}>{children}</h2>
       break;
     case 'h3':
-      heading = <h3 className={cn(titleVariants({ size }))}>{children}</h3>
+      heading = <h3 {...props} className={`${cn(titleVariants({ size }))} ${props.className}`}>{children}</h3>
       break;
     default:
       const _exhaustiveCheck: never = size;
