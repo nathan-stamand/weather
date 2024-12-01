@@ -6,6 +6,8 @@ import { getDayWord } from "@/utils/get-day-word";
 import { getFormattedTime } from "@/utils/get-formatted-time";
 import { useSettings } from "@/providers/settings";
 import { Title } from "@/components/ui/title";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
 
 const Temperature = () => {
   const { settings } = useSettings();
@@ -55,7 +57,10 @@ export const DailyOverview = () => {
       <p><b>{day}</b>, <i>{time}</i></p>
       <p>{date}</p>
       <Title size='h3'>{current.condition?.text}</Title>
-      <p>Rain {forecast.forecastday[0].day.daily_chance_of_rain}%</p>
+      <div className='flex gap-4 justify-center items-center'>
+        <FontAwesomeIcon icon={faCloudRain} color='rgba(19, 92, 233, 0.86)' />{' '}
+        <p>Rain {forecast.forecastday[0].day.daily_chance_of_rain}%</p>
+      </div>
     </div>
   )
 }
