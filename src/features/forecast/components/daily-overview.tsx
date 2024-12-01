@@ -7,8 +7,26 @@ import { getFormattedTime } from "@/utils/get-formatted-time";
 import { useSettings } from "@/providers/settings";
 import { Title } from "@/components/ui/title";
 
-export const DailyOverview = () => {
+const Temperature = () => {
   const { settings } = useSettings();
+  const { currentLocation } = useCurrentLocation();
+  const currentWeatherQuery = useGetForecast({
+    queryConfig: getForecastQueryOptions({ query: currentLocation })
+  });
+
+  if (!currentWeatherQuery || !currentWeatherQuery?.data || !("current" in currentWeatherQuery.data)) return null;
+
+  const { current } = currentWeatherQuery.data;
+
+  const temp = settings.fahrenheit.value ? current.temp_f : current.temp_c;
+  const tempModifier = settings.fahrenheit.value ? "F" : "C";
+
+  return (
+    <p className='text-7xl leading-normal'>{temp}<sup>&#176;{tempModifier}</sup></p>
+  )
+}
+
+export const DailyOverview = () => {
   const { currentLocation, setCurrentLocation } = useCurrentLocation();
   const currentWeatherQuery = useGetForecast({
     queryConfig: getForecastQueryOptions({ query: currentLocation })
@@ -30,13 +48,10 @@ export const DailyOverview = () => {
   const time = getFormattedTime(location.localtime);
   const date = getFormattedDate(location.localtime);
 
-  const temp = settings.fahrenheit.value ? current.temp_f : current.temp_c;
-  const tempModifier = settings.fahrenheit.value ? "F" : "C";
-
   return (
     <div className='text-center space-y-2'>
       <img className='inline-block' src={`https:${current.condition?.icon}`} alt={current.condition?.text} />
-      <p className='text-7xl leading-normal'>{temp}<sup>&#176;{tempModifier}</sup></p>
+      <Temperature />
       <p><b>{day}</b>, <i>{time}</i></p>
       <p>{date}</p>
       <Title size='h3'>{current.condition?.text}</Title>

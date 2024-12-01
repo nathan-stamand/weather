@@ -23,6 +23,7 @@ export type CurrentWeather = {
   wind_mph: number;
   wind_kph: number;
   wind_dir: string;
+  wind_degree: number;
   precip_mm: number;
   precip_in: number;
   humidity: number;
@@ -51,6 +52,7 @@ export type ForecastDay = {
   date: string;
   day: Day;
   hour: Hour[];
+  astro: Astro;
 }
 
 export type Day = {
@@ -84,6 +86,11 @@ export type Hour = CurrentWeather & {
   formattedHour?: string;
   temperature: number;
   time: string;
+}
+
+export type Astro = {
+  sunrise: string;
+  sunset: string;
 }
 
 export type APIError = {
