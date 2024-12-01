@@ -3,6 +3,7 @@ import { Settings } from './components/settings'
 import { ThemeSwitcher } from './components/theme-switcher'
 import { Title } from './components/ui/title'
 import { DailyOverview } from './features/forecast/components/daily-overview'
+import { HourlyChart } from './features/forecast/components/hourly-chart'
 import { Search } from './features/search'
 import { useCurrentLocation } from './providers/current-location'
 
@@ -27,7 +28,7 @@ function App() {
           {currentLocation && <Title size='h2' className='text-center my-auto basis-auto pt-4 border border-transparent border-t-gray-200'>{currentLocation}</Title>}
         </div>
         <main className='bg-gray-300 dark:bg-gray-700 rounded-lg p-4 col-span-8'>
-          Main
+          <HourlyChart />
         </main>
       </div>
     </div>

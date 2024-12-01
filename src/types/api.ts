@@ -50,6 +50,7 @@ export type Condition = {
 export type ForecastDay = {
   date: string;
   day: Day;
+  hour: Hour[];
 }
 
 export type Day = {
@@ -80,6 +81,9 @@ export type Hour = CurrentWeather & {
   chance_of_rain: number;
   will_it_snow: 0 | 1;
   chance_of_snow: number;
+  formattedHour?: string;
+  temperature: number;
+  time: string;
 }
 
 export type APIError = {
