@@ -40,7 +40,7 @@ export const Search = () => {
           ref={input}
           autoComplete='off'
           id='search'
-          placeholder='Search locations'
+          placeholder='&#128269; Search locations'
           name='search'
           value={search}
           onChange={e => handleSearch(e)}
