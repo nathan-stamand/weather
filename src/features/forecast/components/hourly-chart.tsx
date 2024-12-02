@@ -17,6 +17,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { useSettings } from "@/providers/settings";
+import { Title } from "@/components/ui/title";
 
 const chartConfig = {
   desktop: {
@@ -50,47 +51,51 @@ export const HourlyChart = () => {
   const hourArray = createHourlyArray(location.localtime, hours, settings.fahrenheit.value);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>24 Hour Temperature Forecast</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <LineChart
-            accessibilityLayer
-            data={hourArray}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={true} />
-            <XAxis
-              dataKey="formattedHour"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={5}
-            />
-            <YAxis
-              dataKey="temperature"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={5}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent />}
-            />
-            <Line
-              dataKey="temperature"
-              type='natural'
-              stroke="var(--color-desktop)"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <>
+      <Title size='h2'>The Next 24 Hours</Title>
+      <Card>
+        <CardHeader>
+          <CardTitle>Temperature Forecast</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig}>
+            <LineChart
+              accessibilityLayer
+              data={hourArray}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={true} />
+              <XAxis
+                dataKey="formattedHour"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={5}
+              />
+              <YAxis
+                dataKey="temperature"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={5}
+              />
+              {/* TODO: Investigate tooltip causing lots of re-renders across app */}
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent />}
+              />
+              <Line
+                dataKey="temperature"
+                type='natural'
+                stroke="var(--color-desktop)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+    </>
   );
 }

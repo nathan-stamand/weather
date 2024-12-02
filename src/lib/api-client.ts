@@ -34,9 +34,22 @@ class ApiClient {
   }
 
   async get(url = '', params: Record<string, any>) {
-    const urlWithParams = this.buildUrlWithParams(url, params);
-    const response = await fetch(urlWithParams);
-    return await response.json();
+    try {
+      const urlWithParams = this.buildUrlWithParams(url, params);
+      const response = await fetch(urlWithParams);
+      const json = await response.json();
+      if (response.status != 200 || (json && 'error' in json)) {
+        if (import.meta.env.PROD) { // Check if production, show modest error if so...
+          // TODO: Create notification system for these errors in production.
+          console.error("Oops! Something went wrong. Please contact support.");
+        } else {
+          console.log('API Error: ', json.error?.message);
+        }
+      }
+      return json;
+    } catch (e) {
+      throw Error('Error fetching data: ' + e);
+    }
   }
 }
 

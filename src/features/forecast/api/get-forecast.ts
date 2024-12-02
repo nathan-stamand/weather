@@ -22,8 +22,8 @@ export const getForecastQueryOptions = ({
   return queryOptions({
     queryKey: ['currentWeather', query],
     queryFn: () => getForecast(query),
-    staleTime: 1000 * 110,
-    refetchInterval: 1000 * 120,
+    staleTime: 1000 * 30,
+    refetchInterval: 1000 * 60,
   });
 }
 

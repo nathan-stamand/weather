@@ -1,6 +1,6 @@
-import { faDisplay, faGear, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faDisplay, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 const THEMES = [
   {
@@ -17,7 +17,7 @@ const THEMES = [
   },
 ];
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = memo(() => {
   const [initialLoad, setInitialLoad] = useState(true);
   const [theme, setTheme] = useState(1);
   const [showTheme, setShowTheme] = useState(false);
@@ -99,4 +99,4 @@ export const ThemeSwitcher = () => {
       </p>
     </button>
   )
-}
+})

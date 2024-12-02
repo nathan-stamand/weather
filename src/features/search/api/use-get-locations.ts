@@ -1,7 +1,7 @@
 import { env } from "@/env";
 import { api } from "@/lib/api-client"
 import { QueryConfig } from "@/lib/react-query";
-import { APIError, Locale } from "@/types";
+import { Locale, APIError } from "@/types/api";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
 export const getLocations = (query: string = ''): Promise<Locale[] | APIError> | null => {

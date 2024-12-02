@@ -20,7 +20,7 @@ export const Settings = () => {
         </PopoverTrigger>
         <PopoverContent className="divide-y">
           {Object.keys(settings).map((settingName) => (
-            <div key={settingName} className="flex justify-between items-center p-4">
+            <div data-checked={settings[settingName].value} key={settingName} className="flex justify-between items-center p-4">
               <Label
                 htmlFor={`${settingName}-setting`}
                 className={`p-2 rounded-lg ${!settings[settingName].value ? 'bg-primary text-white dark:text-black' : ''}`}
@@ -29,7 +29,7 @@ export const Settings = () => {
               </Label>
               <Switch
                 id={`${String(settingName)}-setting`}
-                checked={Boolean(settings[settingName].value)}
+                checked={settings[settingName].value}
                 onCheckedChange={e => updateSetting(String(settingName), e)}
                 className="data-[state=unchecked]:bg-primary"
               />

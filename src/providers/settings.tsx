@@ -7,11 +7,11 @@ type Setting = {
 
 const DEFAULT_SETTINGS: Record<string, Setting> = {
   fahrenheit: {
-    value: true,
+    value: window.localStorage.getItem('fahrenheit') !== 'false',
     default: 'celcius'
   },
   miles: {
-    value: true,
+    value: window.localStorage.getItem('miles') !== 'false',
     default: 'kilometers'
   },
 }
@@ -36,11 +36,13 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   );
 }
 
+
 export const useSettings = () => {
   const { settings, setSettings } = useContext(Settings);
 
   const updateSetting = (setting: keyof typeof DEFAULT_SETTINGS | string, value: boolean) => {
     if (!(setting in DEFAULT_SETTINGS)) return;
+    window.localStorage.setItem(setting, String(value));
     const settingObj = {
       [setting]: {
         value,
